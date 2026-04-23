@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GiohnneBeautyMatch Brasil ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5;--white:#FFF;--primary:#C17B74;--primary-d:#A5635C;--primary-l:#F5E6E4;
+  --sage:#8BAF8A;--sage-l:#E8F0E7;--peach:#E8C9A0;--peach-l:#FDF4E7;
+  --text:#2C2C2C;--muted:#999;--border:#EDE8E1;
+  --sh:0 4px 24px rgba(0,0,0,.07);--r:16px;--rs:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:'Inter',sans-serif}
+
+/* HEADER */
+header{background:var(--white);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.logo{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--primary);font-weight:700;letter-spacing:-.3px}
+.logo em{color:var(--text);font-style:normal;font-weight:400}
+.hbadge{background:var(--primary-l);color:var(--primary);font-size:.7rem;font-weight:600;padding:4px 10px;border-radius:50px;letter-spacing:.4px}
+
+/* HERO */
+.hero{background:linear-gradient(140deg,#FDF6F0 0%,#F5E6E4 45%,#E8F0E7 100%);padding:44px 20px 36px;text-align:center}
+.hero-pill{display:inline-block;background:rgba(193,123,116,.12);color:var(--primary);font-size:.7rem;font-weight:700;padding:6px 16px;border-radius:50px;margin-bottom:18px;letter-spacing:.6px;text-transform:uppercase;border:1px solid rgba(193,123,116,.2)}
+.hero h1{font-family:'Playfair Display',serif;font-size:2rem;line-height:1.18;margin-bottom:12px}
+.hero h1 span{color:var(--primary)}
+.hero p{color:var(--muted);font-size:.9rem;line-height:1.65;max-width:330px;margin:0 auto 24px}
+.stats{display:flex;justify-content:center;gap:32px;margin-top:20px}
+.stat-n{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--primary);font-weight:700;display:block}
+.stat-l{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+/* LAYOUT */
+main{padding:16px 18px;max-width:620px;margin:0 auto}
+.sec-label{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 18px;border-radius:50px;border:1.5px solid var(--border);background:var(--white);font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;color:var(--muted);white-space:nowrap}
+.tab.on{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* CARD */
+.card{background:var(--white);border-radius:var(--r);padding:22px;box-shadow:var(--sh);margin-bottom:16px}
+.card h2{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:18px}
+
+/* INPUT */
+.il{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:7px}
+.iw{position:relative}
+.ii{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:.95rem;pointer-events:none}
+.si{width:100%;padding:13px 13px 13px 40px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:.9rem;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);transition:all .2s;outline:none}
+.si:focus{border-color:var(--primary);background:var(--white);box-shadow:0 0 0 3px var(--primary-l)}
+.div{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.78rem;margin:14px 0}
+.div::before,.div::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* DROPDOWN */
+.dd{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1.5px solid var(--border);border-radius:var(--rs);box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:50;max-height:210px;overflow-y:auto;display:none}
+.dd.on{display:block}
+.ddi{padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:background .15s}
+.ddi:hover{background:var(--bg)}
+.ddi:not(:last-child){border-bottom:1px solid var(--border)}
+.din{font-weight:500;font-size:.88rem}
+.dib{font-size:.72rem;color:var(--muted)}
+.dic{font-size:.68rem;background:var(--primary-l);color:var(--primary);padding:2px 8px;border-radius:50px;font-weight:600;flex-shrink:0}
+
+/* SELECTED */
+.sel{background:var(--sage-l);border:1.5px solid var(--sage);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;justify-content:space-between;margin-top:8px;animation:fadeIn .25s}
+.selr{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1rem;padding:3px 6px}
+
+/* BTN */
+.btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--primary),var(--primary-d));color:#fff;border:none;border-radius:var(--rs);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px}
+.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 22px rgba(193,123,116,.35)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* RESULTS */
+.res{display:none;animation:fadeIn .4s}
+.res.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.rhead{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.remoji{font-size:2.4rem}
+.rtit{font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.3}
+.rbadge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:700;margin-top:4px}
+.b-ex{background:#E8F5E9;color:#2E7D32}.b-bo{background:#E3F2FD;color:#1565C0}
+.b-mo{background:#FFF8E1;color:#E65100}.b-ru{background:#FFEBEE;color:#C62828}
+
+.meter{margin:16px 0}
+.mrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.mlbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.mpct{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--primary)}
+.mbar{height:11px;background:var(--border);border-radius:50px;overflow:hidden}
+.mfill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--primary),var(--sage));transition:width 1.3s cubic-bezier(.4,0,.2,1);width:0}
+
+.rsec{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.rs{padding:13px;border-radius:var(--rs);font-size:.87rem;line-height:1.65}
+.rs-a{background:#F8F9FA;border-left:3px solid var(--primary)}
+.rs-d{background:var(--sage-l);border-left:3px solid var(--sage)}
+.rs-w{background:#FFF8E1;border-left:3px solid #FFC107}
+.rs-m{background:var(--peach-l);border-left:3px solid var(--peach)}
+.rs-p{background:#F0F4FF;border-left:3px solid #7B9AFF}
+.rst{font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+
+.sbtns{display:flex;gap:8px;margin-top:14px}
+.sbtn{flex:1;padding:10px 6px;border:1.5px solid var(--border);border-radius:var(--rs);background:var(--white);cursor:pointer;font-size:.75rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s;color:var(--text)}
+.sbtn:hover{background:var(--bg);border-color:var(--primary-l)}
+
+/* FEATURE GRID */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.fc{background:var(--white);border-radius:var(--rs);padding:16px;text-align:center;cursor:pointer;box-shadow:var(--sh);transition:all .22s;border:1.5px solid transparent}
+.fc:hover{transform:translateY(-2px);border-color:var(--primary-l)}
+.fi{font-size:1.7rem;margin-bottom:7px}
+.fn{font-size:.8rem;font-weight:700;margin-bottom:3px}
+.fd{font-size:.68rem;color:var(--muted);line-height:1.4}
+.fc-hot{border-color:var(--primary-l);background:linear-gradient(135deg,#FFF,#FDF6F0)}
+.hot-tag{background:var(--primary);color:#fff;font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:50px;margin-left:4px;vertical-align:middle}
+
+/* DESTAQUE */
+.dest{background:linear-gradient(135deg,#FDF4E7,#F5E6E4);border:1.5px solid var(--peach);border-radius:var(--r);padding:18px;margin-bottom:18px;position:relative}
+.dest-tag{position:absolute;top:12px;right:12px;background:var(--peach);color:#7A5C3A;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:50px;text-transform:uppercase;letter-spacing:.4px}
+.dest-inner{display:flex;align-items:center;gap:13px;margin-top:6px}
+
+/* PRODUCTS SCROLL */
+.ps{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px 8px}
+.ps::-webkit-scrollbar{display:none}
+.pc{flex-shrink:0;width:152px;background:var(--white);border-radius:var(--rs);padding:15px;box-shadow:var(--sh);transition:transform .2s}
+.pc:hover{transform:translateY(-2px)}
+.pce{font-size:1.9rem;margin-bottom:7px}
+.pcn{font-weight:600;font-size:.82rem;line-height:1.3;margin-bottom:3px}
+.pcb{font-size:.68rem;color:var(--muted);margin-bottom:9px}
+.pcp{font-weight:700;color:var(--primary);font-size:.92rem;margin-bottom:8px}
+.pbuy{width:100%;padding:7px;background:var(--primary);color:#fff;border:none;border-radius:7px;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s}
+.pbuy:hover{background:var(--primary-d)}
+
+/* RANKING */
+.rank-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--white);border-radius:var(--rs);margin-bottom:8px;box-shadow:var(--sh)}
+.rank-n{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--primary);font-weight:700;width:24px;flex-shrink:0;text-align:center}
+.rank-bar{flex:1;height:6px;background:var(--border);border-radius:50px;overflow:hidden;margin-top:4px}
+.rank-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--primary),var(--sage))}
+
+/* TIPS */
+.tip{background:var(--white);border-radius:var(--rs);padding:14px;display:flex;gap:12px;box-shadow:var(--sh);margin-bottom:9px}
+.tii{font-size:1.4rem;flex-shrink:0;margin-top:1px}
+.tit{font-weight:600;font-size:.87rem;margin-bottom:3px}
+.tid{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* NEWSLETTER */
+.nl{background:linear-gradient(135deg,var(--primary),var(--primary-d));border-radius:var(--r);padding:22px;text-align:center;color:#fff;margin-bottom:18px}
+.nl h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:7px}
+.nl p{font-size:.82rem;opacity:.85;margin-bottom:15px;line-height:1.5}
+.nlf{display:flex;gap:7px}
+.nli{flex:1;padding:11px 13px;border:none;border-radius:8px;font-size:.88rem;font-family:'Inter',sans-serif;outline:none}
+.nlb{padding:11px 14px;background:var(--peach);color:#7A5C3A;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer;white-space:nowrap}
+
+/* MONETIZE BOX */
+.money-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.money-card{background:var(--white);border-radius:var(--rs);padding:15px;box-shadow:var(--sh);border-top:3px solid var(--primary)}
+.mc-icon{font-size:1.5rem;margin-bottom:6px}
+.mc-title{font-weight:700;font-size:.82rem;margin-bottom:4px}
+.mc-desc{font-size:.7rem;color:var(--muted);line-height:1.4}
+
+/* FOOTER */
+footer{background:var(--white);border-top:1px solid var(--border);padding:22px 20px;text-align:center;margin-top:8px}
+.fl{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--primary);margin-bottom:7px}
+.ft{font-size:.72rem;color:var(--muted);line-height:1.7}
+
+/* LOADING */
+.lov{display:none;position:fixed;inset:0;background:rgba(255,255,255,.88);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(3px)}
+.lov.on{display:flex}
+.spin{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-family:'Playfair Display',serif;color:var(--primary);font-size:.95rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(100px);background:#2C2C2C;color:#fff;padding:11px 22px;border-radius:50px;font-size:.82rem;font-weight:500;z-index:300;transition:transform .3s;white-space:nowrap;max-width:90vw;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+@media(min-width:600px){
+  .hero h1{font-size:2.5rem}
+  .fgrid{grid-template-columns:repeat(4,1fr)}
+  .money-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="lov" id="lov"><div class="spin"></div><div class="ltxt" id="ltxt">Analisando fórmulas... ✨</div></div>
+<div class="toast" id="toast"></div>
+
+<header>
+  <div class="logo">Giohnne<em>Beauty</em></div>
+  <div class="hbadge">🇧🇷 100% Brasil</div>
+</header>
+
+<div class="hero">
+  <div class="hero-pill">✨ IA especialista em cosméticos</div>
+  <h1>Sua beleza merece<br>a <span>combinação certa</span></h1>
+  <p>Descubra se seus produtos de skincare, maquiagem e cabelos se combinam de verdade — em segundos, de graça.</p>
+  <div class="stats">
+    <div><span class="stat-n">500+</span><span class="stat-l">Marcas BR</span></div>
+    <div><span class="stat-n">IA</span><span class="stat-l">Análise Real</span></div>
+    <div><span class="stat-n">Grátis</span><span class="stat-l">Para sempre</span></div>
+  </div>
+</div>
+
+<main>
+
+<div class="tabs" style="margin-top:16px">
+  <button class="tab on" onclick="setTab('todos',this)">🌟 Todos</button>
+  <button class="tab" onclick="setTab('skincare',this)">🧴 Skincare</button>
+  <button class="tab" onclick="setTab('maquiagem',this)">💄 Maquiagem</button>
+  <button class="tab" onclick="setTab('cabelos',this)">🌀 Cabelos</button>
+</div>
+
+<!-- SEARCH -->
+<div class="card">
+  <h2>🔬 Verificar Compatibilidade</h2>
+  <div style="display:flex;flex-direction:column;gap:14px">
+
+    <div id="grp1">
+      <label class="il">Produto 1</label>
+      <div class="iw">
+        <span class="ii">🔍</span>
+        <input class="si" id="i1" placeholder="Ex: Hidratante Nivea, Base Vult..." oninput="filter(1)" onfocus="openDD(1)" autocomplete="off">
+        <div class="dd" id="dd1"></div>
+      </div>
+      <div id="sel1" style="display:none"></div>
+    </div>
+
+    <div class="div">➕ combina com</div>
+
+    <div id="grp2">
+      <label class="il">Produto 2</label>
+      <div class="iw">
+        <span class="ii">🔍</span>
+        <input class="si" id="i2" placeholder="Ex: Base Maybelline, Leave-in Lola..." oninput="filter(2)" onfocus="openDD(2)" autocomplete="off">
+        <div class="dd" id="dd2"></div>
+      </div>
+      <div id="sel2" style="display:none"></div>
+    </div>
+  </div>
+
+  <button class="btn" id="btnck" onclick="check()" disabled>
+    <span>✨</span> Verificar Compatibilidade
+  </button>
+  <div style="text-align:center;margin-top:10px;font-size:.72rem;color:var(--muted)">🔒 Análise por IA especializada em cosméticos · Gratuita</div>
+</div>
+
+<!-- RESULT -->
+<div class="card res" id="resCard">
+  <div class="rhead">
+    <div class="remoji" id="remoji">✨</div>
+    <div>
+      <div class="rtit" id="rtit">Análise de Compatibilidade</div>
+      <span class="rbadge" id="rbadge">—</span>
+    </div>
+  </div>
+  <div class="meter">
+    <div class="mrow"><span class="mlbl">Índice de Compatibilidade</span><span class="mpct" id="mpct">0%</span></div>
+    <div class="mbar"><div class="mfill" id="mfill"></div></div>
+  </div>
+  <div class="rsec" id="rsec"></div>
+  <div class="sbtns">
+    <button class="sbtn" onclick="share()">📤 Compartilhar</button>
+    <button class="sbtn" onclick="save()">💾 Salvar</button>
+    <button class="sbtn" onclick="reset()">🔄 Nova</button>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="sec-label" style="margin-top:4px">Recursos Exclusivos</div>
+<div class="fgrid">
+  <div class="fc fc-hot" onclick="toast2('🎯 Quiz de Pele — Em breve! Seja avisada pelo e-mail.')">
+    <div class="fi">🎯</div>
+    <div class="fn">Quiz de Pele <span class="hot-tag">NEW</span></div>
+    <div class="fd">Descubra seu tipo exato</div>
+  </div>
+  <div class="fc" onclick="toast2('🌀 Modo Cacheada — Em breve! Rotina especial para cachos e crespos.')">
+    <div class="fi">🌀</div>
+    <div class="fn">Modo Cacheada</div>
+    <div class="fd">Rotina para cachos e crespos</div>
+  </div>
+  <div class="fc" onclick="toast2('📋 Minha Rotina — Em breve! Salve seus produtos favoritos.')">
+    <div class="fi">📋</div>
+    <div class="fn">Minha Rotina</div>
+    <div class="fd">Monte seu ritual de beleza</div>
+  </div>
+  <div class="fc" onclick="toast2('🛡️ Check ANVISA — Em breve! Veja se ingredientes são aprovados no Brasil.')">
+    <div class="fi">🛡️</div>
+    <div class="fn">Check ANVISA</div>
+    <div class="fd">Segurança regulatória BR</div>
+  </div>
+</div>
+
+<!-- DESTAQUE PARCEIRO -->
+<div class="dest">
+  <div class="sec-label" style="margin-bottom:3px">⭐ Parceiro em Destaque</div>
+  <div class="dest-tag">PATROCINADO</div>
+  <div class="dest-inner">
+    <div style="font-size:2.4rem">🧴</div>
+    <div style="flex:1">
+      <div style="font-weight:700;font-size:.92rem;margin-bottom:3px">Hydro Boost Neutrogena</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:9px">Compatível com 94% das bases do mercado</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-weight:700;color:var(--primary)">R$ 49,90</span>
+        <a href="https://www.amazon.com.br/s?k=neutrogena+hydro+boost&tag=giohnne-20" target="_blank"
+          style="background:var(--primary);color:#fff;padding:6px 13px;border-radius:7px;font-size:.72rem;font-weight:700">Ver na Amazon →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUGESTOES -->
+<div class="sec-label">Produtos em Alta 🔥</div>
+<div class="ps" id="ps"><!-- js --></div>
+
+<!-- RANKING -->
+<div class="sec-label" style="margin-top:20px">🏆 Combinações Mais Populares</div>
+<div id="rankList">
+  <div class="rank-item"><div class="rank-n">1</div><div style="flex:1"><div style="font-size:.85rem;font-weight:600">Sérum Vitamina C + Protetor Solar</div><div style="font-size:.72rem;color:var(--muted)">Skincare · 98% compatível</div><div class="rank-bar"><div class="rank-fill" style="width:98%"></div></div></div></div>
+  <div class="rank-item"><div class="rank-n">2</div><div style="flex:1"><div style="font-size:.85rem;font-weight:600">Primer + Base Mate</div><div style="font-size:.72rem;color:var(--muted)">Maquiagem · 96% compatível</div><div class="rank-bar"><div class="rank-fill" style="width:96%"></div></div></div></div>
+  <div class="rank-item"><div class="rank-n">3</div><div style="flex:1"><div style="font-size:.85rem;font-weight:600">Shampoo Low Poo + Leave-in Cachos</div><div style="font-size:.72rem;color:var(--muted)">Cabelos · 95% compatível</div><div class="rank-bar"><div class="rank-fill" style="width:95%"></div></div></div></div>
+  <div class="rank-item"><div class="rank-n">4</div><div style="flex:1"><div style="font-size:.85rem;font-weight:600">Niacinamida + Hidratante Levinho</div><div style="font-size:.72rem;color:var(--muted)">Skincare · 93% compatível</div><div class="rank-bar"><div class="rank-fill" style="width:93%"></div></div></div></div>
+</div>
+
+<!-- DICAS -->
+<div class="sec-label" style="margin-top:20px">🌿 Dicas de Especialista</div>
+<div class="tip"><div class="tii">⚠️</div><div><div class="tit">Retinol + Vitamina C = Não ao mesmo tempo!</div><div class="tid">Use Vitamina C de manhã e Retinol à noite. Combiná-los pode irritar e reduzir a eficácia de ambos.</div></div></div>
+<div class="tip"><div class="tii">💧</div><div><div class="tit">Niacinamida + Ácido Hialurônico = ❤️</div><div class="tid">Uma das melhores duplas para pele! Hidratam profundamente e se potencializam juntos. Qualquer tipo de pele.</div></div></div>
+<div class="tip"><div class="tii">🌀</div><div><div class="tit">Cronograma capilar: proteína vs hidratação</div><div class="tid">Nunca use dois produtos proteicos juntos. Alterne semanas: proteína → umectação → hidratação.</div></div></div>
+<div class="tip"><div class="tii">☀️</div><div><div class="tit">Protetor solar SEMPRE por último (skincare)</div><div class="tid">Aplique o protetor solar como última etapa da sua rotina da manhã, após hidratante e sérum.</div></div></div>
+
+<!-- IDÉIAS DE MONETIZAÇÃO -->
+<div class="sec-label" style="margin-top:20px">💰 Como o App Gera Receita (para você saber)</div>
+<div class="money-grid">
+  <div class="money-card"><div class="mc-icon">🔗</div><div class="mc-title">Links Afiliados</div><div class="mc-desc">Comissão em cada produto clicado (Amazon, Shopee, Magalu)</div></div>
+  <div class="money-card"><div class="mc-icon">⭐</div><div class="mc-title">Marca Parceira</div><div class="mc-desc">Marcas pagam para aparecer em destaque após análise</div></div>
+  <div class="money-card"><div class="mc-icon">👑</div><div class="mc-title">Plano Premium</div><div class="mc-desc">Rotina ilimitada, alertas e análise de pele avançada</div></div>
+  <div class="money-card"><div class="mc-icon">📦</div><div class="mc-title">Kit Curado</div><div class="mc-desc">Venda kits com produtos compatíveis selecionados pela IA</div></div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="nl">
+  <h3>💌 Faça parte da comunidade!</h3>
+  <p>Receba análises exclusivas, dicas de ingredientes e as tendências de beleza do Brasil toda semana — de graça.</p>
+  <div class="nlf">
+    <input type="email" class="nli" id="nlemail" placeholder="seu@email.com.br">
+    <button class="nlb" onclick="subscribe()">Entrar! 💄</button>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="fl">GiohnneBeautyMatch 🇧🇷</div>
+  <div class="ft">
+    Feito com 💄 para mulheres brasileiras · Análises baseadas em IA<br>
+    Não substituem orientação dermatológica ou tricológica profissional<br>
+    <span style="color:var(--primary)">🔗 Links marcados são afiliados e ajudam a manter o site gratuito</span>
+  </div>
+</footer>
+
+<script>
+// ─── PRODUTO DATABASE ───────────────────────────────────────
+const DB=[
+  {id:1,e:"💧",n:"Hidratante Nivea Creme",m:"Nivea",cat:"skincare",sub:"Hidratante",p:"R$ 12,90",i:["Aqua","Mineral Oil","Glycerin","Microcrystalline Wax","Lanolin Alcohol","Paraffin","Panthenol","Citric Acid"]},
+  {id:2,e:"💦",n:"Hydro Boost Neutrogena",m:"Neutrogena",cat:"skincare",sub:"Hidratante",p:"R$ 49,90",i:["Aqua","Dimethicone","Glycerin","Hyaluronic Acid","Phenoxyethanol","Carbomer","Sodium Hydroxide"]},
+  {id:3,e:"🌟",n:"Sérum Vitamina C FaceD",m:"Face D",cat:"skincare",sub:"Sérum",p:"R$ 38,90",i:["Aqua","Ascorbic Acid","Glycerin","Niacinamide","Ferulic Acid","Panthenol","Citric Acid"]},
+  {id:4,e:"☀️",n:"Protetor Solar Episol FPS60",m:"Mantecorp",cat:"skincare",sub:"Protetor Solar",p:"R$ 55,90",i:["Aqua","Avobenzone","Octinoxate","Tinosorb S","Glycerin","Dimethicone","Niacinamide","Tocopherol"]},
+  {id:5,e:"🌙",n:"Retinol 0.3% The Ordinary",m:"The Ordinary",cat:"skincare",sub:"Sérum Retinol",p:"R$ 79,90",i:["Caprylic/Capric Triglyceride","Retinol","Simmondsia Chinensis Seed Oil","BHT"]},
+  {id:6,e:"✨",n:"Sérum Niacinamida 10% Vichy",m:"Vichy",cat:"skincare",sub:"Sérum",p:"R$ 89,90",i:["Aqua","Niacinamide","Zinc PCA","Glycerin","Panthenol","Hyaluronic Acid"]},
+  {id:7,e:"🌿",n:"Gel Sabonete CeraVe Hidratante",m:"CeraVe",cat:"skincare",sub:"Limpeza",p:"R$ 54,90",i:["Aqua","Glycerin","Ceramide NP","Ceramide AP","Ceramide EOP","Hyaluronic Acid","Niacinamide"]},
+  {id:8,e:"🌸",n:"Tônico Antissinais Payot",m:"Payot",cat:"skincare",sub:"Tônico",p:"R$ 42,90",i:["Aqua","Glycerin","Witch Hazel","Niacinamide","Glycolic Acid","Panthenol","Centella Asiatica"]},
+  {id:9,e:"💄",n:"Base Vult Mate HD",m:"Vult",cat:"maquiagem",sub:"Base",p:"R$ 24,90",i:["Aqua","Cyclopentasiloxane","Dimethicone","Titanium Dioxide","Glycerin","Isododecane","Talc","Niacinamide"]},
+  {id:10,e:"💋",n:"Base Fit Me Maybelline",m:"Maybelline",cat:"maquiagem",sub:"Base",p:"R$ 39,90",i:["Aqua","Dimethicone","Glycerin","Titanium Dioxide","Isododecane","Silica","Niacinamide"]},
+  {id:11,e:"🎨",n:"Base Infaillible L'Oréal",m:"L'Oréal",cat:"maquiagem",sub:"Base",p:"R$ 59,90",i:["Aqua","Isododecane","Cyclopentasiloxane","Titanium Dioxide","Glycerin","Dimethicone"]},
+  {id:12,e:"🌟",n:"Primer Matificante Ruby Rose",m:"Ruby Rose",cat:"maquiagem",sub:"Primer",p:"R$ 19,90",i:["Aqua","Cyclopentasiloxane","Dimethicone","Silica","Glycerin","Niacinamide","Hyaluronic Acid"]},
+  {id:13,e:"✨",n:"Corretivo Tracta Cobertura Total",m:"Tracta",cat:"maquiagem",sub:"Corretivo",p:"R$ 22,90",i:["Aqua","Dimethicone","Glycerin","Titanium Dioxide","Wax","Talc","Silica"]},
+  {id:14,e:"💎",n:"Setting Spray Quem Disse, Berenice?",m:"QDB",cat:"maquiagem",sub:"Fixador",p:"R$ 49,90",i:["Aqua","Glycerin","Dimethicone","Panthenol","Hyaluronic Acid","Alcohol"]},
+  {id:15,e:"🌹",n:"Blush Cremoso Eudora",m:"Eudora",cat:"maquiagem",sub:"Blush",p:"R$ 35,90",i:["Dimethicone","Cyclopentasiloxane","Glycerin","Jojoba Oil","Tocopherol","Mica"]},
+  {id:16,e:"🌊",n:"Shampoo Elseve Óleo Extraordinário",m:"L'Oréal",cat:"cabelos",sub:"Shampoo",p:"R$ 19,90",i:["Aqua","Sodium Laureth Sulfate","Cocamidopropyl Betaine","Glycerin","Argan Oil","Panthenol","Guar Hydroxypropyltrimonium Chloride"]},
+  {id:17,e:"🍃",n:"Shampoo Low Poo WNF",m:"WNF",cat:"cabelos",sub:"Shampoo Low Poo",p:"R$ 44,90",i:["Aqua","Cocamidopropyl Betaine","Sodium Cocoamphoacetate","Glycerin","Panthenol","Hydrolyzed Wheat Protein","Aloe Vera"]},
+  {id:18,e:"🌀",n:"Leave-in Meu Cacho Minha Vida Lola",m:"Lola Cosmetics",cat:"cabelos",sub:"Leave-in",p:"R$ 29,90",i:["Aqua","Cetearyl Alcohol","Behentrimonium Chloride","Glycerin","Hydrolyzed Wheat Protein","Panthenol","Aloe Vera","Argan Oil"]},
+  {id:19,e:"🍃",n:"Máscara Bomba Crescimento Salon Line",m:"Salon Line",cat:"cabelos",sub:"Máscara",p:"R$ 18,90",i:["Aqua","Cetearyl Alcohol","Behentrimonium Chloride","Hydrolyzed Keratin","Glycerin","Collagen","Panthenol"]},
+  {id:20,e:"💎",n:"Óleo Capilar Argan Wella",m:"Wella",cat:"cabelos",sub:"Óleo Capilar",p:"R$ 89,90",i:["Cyclopentasiloxane","Dimethicone","Argania Spinosa Kernel Oil","Parfum","Tocopherol"]},
+  {id:21,e:"🌸",n:"Co-Wash Lola Cosmetics",m:"Lola Cosmetics",cat:"cabelos",sub:"Co-Wash",p:"R$ 26,90",i:["Aqua","Cetearyl Alcohol","Behentrimonium Chloride","Glycerin","Hydrolyzed Silk","Panthenol","Aloe Vera"]},
+  {id:22,e:"🌿",n:"Máscara Proteína Novex",m:"Novex",cat:"cabelos",sub:"Máscara Proteína",p:"R$ 22,90",i:["Aqua","Cetearyl Alcohol","Hydrolyzed Keratin","Hydrolyzed Collagen","Behentrimonium Chloride","Glycerin"]},
+  {id:23,e:"💆",n:"Condicionador Seda Hidra Cachos",m:"Seda",cat:"cabelos",sub:"Condicionador",p:"R$ 14,90",i:["Aqua","Cetearyl Alcohol","Behentrimonium Methosulfate","Glycerin","Panthenol","Hydrolyzed Keratin","Aloe Vera"]},
+  {id:24,e:"🫧",n:"Shampoo Bomba Lola Cosmetics",m:"Lola Cosmetics",cat:"cabelos",sub:"Shampoo",p:"R$ 24,90",i:["Aqua","Sodium Laureth Sulfate","Cocamidopropyl Betaine","Panthenol","Castor Oil","Glycerin","Biotin"]},
+];
+
+// ─── STATE ───────────────────────────────────────────────────
+let sel={1:null,2:null}, cat='todos', lastR=null;
+
+// ─── INIT ────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  renderPS();
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('.iw')){
+      document.getElementById('dd1').classList.remove('on');
+      document.getElementById('dd2').classList.remove('on');
+    }
+  });
+});
+
+// ─── TAB ─────────────────────────────────────────────────────
+function setTab(c,btn){
+  cat=c;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  resetInput(1); resetInput(2);
+}
+
+function filtered(){
+  return cat==='todos'?DB:DB.filter(p=>p.cat===cat);
+}
+
+// ─── SEARCH ──────────────────────────────────────────────────
+function filter(n){
+  const q=document.getElementById(`i${n}`).value.toLowerCase().trim();
+  const dd=document.getElementById(`dd${n}`);
+  const other=sel[n===1?2:1];
+  const list=filtered().filter(p=>(p.n.toLowerCase().includes(q)||p.m.toLowerCase().includes(q)||p.sub.toLowerCase().includes(q))&&p!==other);
+  if(!q){dd.classList.remove('on');return;}
+  renderDD(dd,list,n);
+}
+
+function openDD(n){
+  const dd=document.getElementById(`dd${n}`);
+  const other=sel[n===1?2:1];
+  const list=filtered().filter(p=>p!==other).slice(0,8);
+  renderDD(dd,list,n);
+}
+
+function renderDD(dd,list,n){
+  dd.innerHTML=list.length===0
+    ?`<div class="ddi" style="color:var(--muted);font-size:.85rem">Produto não encontrado 🙁</div>`
+    :list.slice(0,7).map(p=>`
+      <div class="ddi" onclick="pick(${p.id},${n})">
+        <span style="font-size:1.2rem">${p.e}</span>
+        <div style="flex:1"><div class="din">${p.n}</div><div class="dib">${p.m}</div></div>
+        <span class="dic">${p.sub}</span>
+      </div>`).join('');
+  dd.classList.add('on');
+}
+
+function pick(id,n){
+  const p=DB.find(x=>x.id===id);
+  sel[n]=p;
+  const inp=document.getElementById(`i${n}`);
+  inp.value=''; inp.style.display='none';
+  const sd=document.getElementById(`sel${n}`);
+  sd.innerHTML=`<div class="sel"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:1.4rem">${p.e}</span><div><div style="font-weight:600;font-size:.88rem">${p.n}</div><div style="font-size:.72rem;color:var(--muted)">${p.m} · ${p.sub}</div></div></div><button class="selr" onclick="resetInput(${n})">✕</button></div>`;
+  sd.style.display='block';
+  document.getElementById(`dd${n}`).classList.remove('on');
+  ready();
+}
+
+function resetInput(n){
+  sel[n]=null;
+  const inp=document.getElementById(`i${n}`);
+  inp.style.display='block'; inp.value='';
+  inp.placeholder=n===1?'Ex: Hidratante Nivea, Base Vult...':'Ex: Base Maybelline, Leave-in Lola...';
+  document.getElementById(`sel${n}`).style.display='none';
+  ready();
+  document.getElementById('resCard').classList.remove('on');
+}
+
+function ready(){
+  document.getElementById('btnck').disabled=!(sel[1]&&sel[2]);
+}
+
+// ─── CHECK ───────────────────────────────────────────────────
+const loadMsgs=["Analisando fórmulas... 🔬","Consultando ingredientes... 🧪","Cruzando dados de compatibilidade... ✨","Quase lá, preparando seu resultado! 💄"];
+let loadIdx=0, loadTimer;
+
+async function check(){
+  const p1=sel[1],p2=sel[2];
+  if(!p1||!p2)return;
+
+  showLoad(true);
+  loadIdx=0;
+  document.getElementById('ltxt').textContent=loadMsgs[0];
+  loadTimer=setInterval(()=>{
+    loadIdx=(loadIdx+1)%loadMsgs.length;
+    document.getElementById('ltxt').textContent=loadMsgs[loadIdx];
+  },2000);
+
+  const prompt=`Você é uma especialista em cosméticos, dermatologia e tricologia com 20 anos de experiência, especializada no mercado brasileiro.
+
+Analise a compatibilidade entre estes dois produtos de beleza:
+
+**Produto 1:** ${p1.n} — ${p1.m} (${p1.sub})
+Ingredientes: ${p1.i.join(', ')}
+
+**Produto 2:** ${p2.n} — ${p2.m} (${p2.sub})
+Ingredientes: ${p2.i.join(', ')}
+
+Considere: interação química dos ingredientes, pH, eficácia combinada, possíveis irritações, adequação ao clima brasileiro e tipos de pele/cabelo da mulher brasileira.
+
+Responda APENAS com JSON puro sem markdown nem explicações extras:
+{
+  "percentual": 85,
+  "classificacao": "Ótima Combinação",
+  "explicacao": "Explicação em português BR amigável e clara sobre a compatibilidade (2-3 frases)",
+  "dica": "Como usar os dois juntos para melhor resultado (1-2 frases práticas)",
+  "alerta": "Aviso importante se houver risco real, null se não houver",
+  "melhor_momento": "Quando e como usar cada produto (manhã/noite/semana etc)",
+  "publico_ideal": "Para qual tipo de pele ou cabelo essa combinação é mais indicada"
+}
+
+Critério de percentual: 90-100=Perfeita combinação, 70-89=Boa combinação, 50-69=Use com moderação, 0-49=Evite combinar.`;
+
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})
+    });
+    const d=await r.json();
+    const raw=d.content.find(b=>b.type==="text")?.text||"{}";
+    const res=JSON.parse(raw.replace(/```json|```/g,"").trim());
+    lastR={p1,p2,res};
+    showRes(res,p1,p2);
+  }catch(e){
+    toast2("❌ Erro na análise. Verifique sua conexão.");
+    console.error(e);
+  }finally{
+    clearInterval(loadTimer);
+    showLoad(false);
+  }
+}
+
+// ─── SHOW RESULT ─────────────────────────────────────────────
+function showRes(r,p1,p2){
+  const pct=Math.min(100,Math.max(0,r.percentual||75));
+  let em,bc;
+  if(pct>=90){em="🥰";bc="b-ex";}
+  else if(pct>=70){em="👍";bc="b-bo";}
+  else if(pct>=50){em="⚠️";bc="b-mo";}
+  else{em="🚫";bc="b-ru";}
+
+  document.getElementById('remoji').textContent=em;
+  document.getElementById('rtit').textContent=`${p1.n} + ${p2.n}`;
+  const rb=document.getElementById('rbadge');
+  rb.textContent=r.classificacao||"Análise Concluída";
+  rb.className=`rbadge ${bc}`;
+
+  document.getElementById('mpct').textContent=`${pct}%`;
+  setTimeout(()=>document.getElementById('mfill').style.width=`${pct}%`,80);
+
+  let h=`<div class="rs rs-a"><div class="rst">📝 Análise</div>${r.explicacao}</div>
+         <div class="rs rs-d"><div class="rst">💡 Como usar juntos</div>${r.dica}</div>`;
+  if(r.alerta) h+=`<div class="rs rs-w"><div class="rst">⚠️ Atenção</div>${r.alerta}</div>`;
+  if(r.melhor_momento) h+=`<div class="rs rs-m"><div class="rst">⏰ Melhor momento</div>${r.melhor_momento}</div>`;
+  if(r.publico_ideal) h+=`<div class="rs rs-p"><div class="rst">👤 Ideal para</div>${r.publico_ideal}</div>`;
+
+  document.getElementById('rsec').innerHTML=h;
+  const card=document.getElementById('resCard');
+  card.classList.add('on');
+  setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}),80);
+  renderPS(p1.cat);
+}
+
+// ─── PRODUCTS SCROLL ─────────────────────────────────────────
+function renderPS(pref=null){
+  let list=pref?[...DB.filter(p=>p.cat===pref),...DB.filter(p=>p.cat!==pref)]:DB;
+  document.getElementById('ps').innerHTML=list.slice(0,9).map(p=>`
+    <div class="pc">
+      <div class="pce">${p.e}</div>
+      <div class="pcn">${p.n}</div>
+      <div class="pcb">${p.m} · ${p.sub}</div>
+      <div class="pcp">${p.p}</div>
+      <button class="pbuy" onclick="openAff('${p.n}')">Ver produto →</button>
+    </div>`).join('');
+}
+
+// ─── UTILS ───────────────────────────────────────────────────
+function showLoad(on){document.getElementById('lov').classList.toggle('on',on);}
+
+function toast2(msg,ms=3200){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),ms);
+}
+
+function share(){
+  if(!lastR)return;
+  const{p1,p2,res}=lastR;
+  const txt=`✨ Testei a compatibilidade de "${p1.n}" + "${p2.n}" no GiohnneBeautyMatch Brasil!\n\nResultado: ${res.percentual}% — ${res.classificacao}\n\nTeste também: ${location.href}`;
+  if(navigator.share){navigator.share({title:'GiohnneBeautyMatch',text:txt});}
+  else{navigator.clipboard.writeText(txt).then(()=>toast2('✅ Copiado! Cole no Instagram, WhatsApp ou TikTok 💄'));}
+}
+
+function save(){
+  if(!lastR)return;
+  const saved=JSON.parse(localStorage.getItem('gbm_saves')||'[]');
+  saved.unshift({...lastR,date:new Date().toLocaleDateString('pt-BR')});
+  localStorage.setItem('gbm_saves',JSON.stringify(saved.slice(0,20)));
+  toast2('💾 Análise salva! Acesse em "Minha Rotina" em breve.');
+}
+
+function reset(){
+  resetInput(1); resetInput(2);
+  document.getElementById('resCard').classList.remove('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openAff(name){
+  window.open(`https://www.amazon.com.br/s?k=${encodeURIComponent(name)}&tag=giohnne-20`,'_blank');
+}
+
+function subscribe(){
+  const v=document.getElementById('nlemail').value;
+  if(!v||!v.includes('@')){toast2('Digite um e-mail válido 😊');return;}
+  toast2(`🎉 Bem-vinda! ${v} cadastrado com sucesso!`);
+  document.getElementById('nlemail').value='';
+}
+</script>
+</body>
+</html>
